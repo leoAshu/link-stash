@@ -2,14 +2,15 @@
     "manifest_version": 3,
     "name": "Link Stash",
     "version": "1.0",
-    "description": "",
+    "description": "A place to conveniently save and share all important links",
     "icons": {
         "16": "link.png",
         "32": "link.png",
         "128": "link.png"
     },
     "action": {
-        "default_popup": "index.html"
-    },
-    "host_permissions": ["https://*/*", "http://*/*"]
+        "default_icon": "link.png",
+        "default_title": "Link Stash",
+        "default_popup": "src/components/popup/index.html"
+    }
 }
