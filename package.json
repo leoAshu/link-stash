@@ -5,11 +5,9 @@
     "type": "module",
     "description": "A place to conveniently save and share all important links",
     "scripts": {
-        "dev": "vite",
+        "dev": "npx nodemon",
         "build": "tsc && vite build",
-        "format": "npx prettier --write .",
-        "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
+        "format": "npx prettier --write ."
     },
     "dependencies": {
         "react": "^18.2.0",
