@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
+import makeManifest from './vite-plugins/make-manifest.ts'
 
 export default defineConfig({
-    plugins: [react()],
+    plugins: [react(), makeManifest()],
     build: {
         rollupOptions: {
             input: {

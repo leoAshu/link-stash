@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Link Stash",
-    "version": "1.0",
+    "version": "0.0.0",
     "description": "A place to conveniently save and share all important links",
     "icons": {
         "16": "link.png",
