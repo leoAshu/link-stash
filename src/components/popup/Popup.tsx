@@ -1,30 +1,20 @@
+import ReactDOM from 'react-dom/client'
 import { useState } from 'react'
-import reactLogo from '../../assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import { View, renderView } from './views'
+import './index.css'
 
 function Popup() {
-    const [count, setCount] = useState(0)
+    const [view, setView] = useState(View.Home)
 
     return (
-        <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-        </>
+        <main className="w-60 h-72 bg-[#F5F7F9]">
+            <button onClick={() => setView(View.Home)}>Home</button>
+            <br />
+            <button onClick={() => setView(View.Add)}>Add</button>
+            {renderView(view)}
+        </main>
     )
 }
 
-export default Popup
+ReactDOM.createRoot(document.getElementById('root')!).render(<Popup />)
