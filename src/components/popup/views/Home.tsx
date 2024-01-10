@@ -1,12 +1,5 @@
-import Header from '../../view-components/Header'
-
 const Home = () => {
-    return (
-        <>
-            <Header />
-            Home
-        </>
-    )
+    return <>Home</>
 }
 
 export default Home

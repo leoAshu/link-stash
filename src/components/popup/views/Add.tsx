@@ -1,12 +1,5 @@
-import Header from '../../view-components/Header'
-
 const Add = () => {
-    return (
-        <>
-            <Header />
-            Add
-        </>
-    )
+    return <>Add</>
 }
 
 export default Add
