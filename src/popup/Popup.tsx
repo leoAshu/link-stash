@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import { Add, Home, View, ViewProvider, useView } from './views'
-import { logo, add } from '@assets/index.ts'
+import { Header } from './view-components'
 import './index.css'
 
 function Popup() {
@@ -19,20 +19,7 @@ function Popup() {
 
     return (
         <main className="w-60 h-72 bg-[#F5F7F9]">
-            <div className="bg-white shadow-md">
-                <div className="h-12 px-4 flex justify-between items-center">
-                    <img className="h-8" src={logo} />
-                    <div
-                        className={`hover:bg-gray-100 active:bg-gray-200 p-2 rounded-full cursor-pointer ${
-                            view == View.Home ? '' : '-rotate-45'
-                        } transition-all ease-in-out duration-300`}
-                        onClick={() => setView(view == View.Home ? View.Add : View.Home)}
-                    >
-                        <img src={add} />
-                    </div>
-                </div>
-            </div>
-
+            <Header />
             {renderView()}
         </main>
     )
