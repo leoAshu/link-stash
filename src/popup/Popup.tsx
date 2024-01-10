@@ -4,7 +4,7 @@ import { Header } from './view-components'
 import './index.css'
 
 function Popup() {
-    const { view, setView } = useView()
+    const { view } = useView()
 
     const renderView = () => {
         switch (view) {
