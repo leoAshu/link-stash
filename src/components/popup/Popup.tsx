@@ -5,9 +5,10 @@ import add from '../../assets/add-icon.svg'
 import './index.css'
 import { useState } from 'react'
 import { Add, Home, View } from './views'
+import { ViewProvider, useView } from './views/ViewContext'
 
 function Popup() {
-    const [view, setView] = useState(View.Home)
+    const { view, setView } = useView()
 
     const renderView = () => {
         switch (view) {
@@ -41,4 +42,8 @@ function Popup() {
     )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<Popup />)
+ReactDOM.createRoot(document.getElementById('root')!).render(
+    <ViewProvider>
+        <Popup />
+    </ViewProvider>
+)
