@@ -26,10 +26,12 @@ function Popup() {
                 <div className="h-12 px-4 flex justify-between items-center">
                     <img className="h-8" src={logo} />
                     <div
-                        className="hover:bg-gray-100 active:bg-gray-200 p-2 rounded-full transition-colors ease-in-out duration-300"
+                        className={`hover:bg-gray-100 active:bg-gray-200 p-2 rounded-full cursor-pointer ${
+                            view == View.Home ? '' : '-rotate-45'
+                        } transition-all ease-in-out duration-300`}
                         onClick={() => setView(view == View.Home ? View.Add : View.Home)}
                     >
-                        <img className={view == View.Home ? '' : 'rotate-45'} src={add} />
+                        <img src={add} />
                     </div>
                 </div>
             </div>

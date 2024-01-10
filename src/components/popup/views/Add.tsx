@@ -1,5 +1,5 @@
 const Add = () => {
-    return <>Add</>
+    return <></>
 }
 
 export default Add
