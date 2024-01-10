@@ -14,7 +14,7 @@ const manifest: Manifest.WebExtensionManifest = {
     action: {
         default_icon: 'link.png',
         default_title: 'Link Stash',
-        default_popup: 'src/components/popup/index.html',
+        default_popup: 'src/popup/index.html',
     },
 }
 

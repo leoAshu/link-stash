@@ -1,11 +1,7 @@
 import ReactDOM from 'react-dom/client'
-
-import logo from '../../assets/header-logo.svg'
-import add from '../../assets/add-icon.svg'
+import { Add, Home, View, ViewProvider, useView } from './views'
+import { logo, add } from '@assets/index.ts'
 import './index.css'
-import { useState } from 'react'
-import { Add, Home, View } from './views'
-import { ViewProvider, useView } from './views/ViewContext'
 
 function Popup() {
     const { view, setView } = useView()

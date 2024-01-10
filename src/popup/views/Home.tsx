@@ -1,4 +1,4 @@
-import roundButton from '../../../assets/round-button.svg'
+import { roundButton } from '@assets/index.ts'
 const Home = () => {
     return (
         <div className="flex">
