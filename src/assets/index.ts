@@ -1,5 +1,7 @@
 import add from './add-icon.svg'
 import logo from './header-logo.svg'
-import menu from './menu.svg'
+import copy from './copy.svg'
+import edit from './edit.svg'
+import del from './delete.svg'
 
-export { add, logo, menu }
+export { add, logo, copy, edit, del }
