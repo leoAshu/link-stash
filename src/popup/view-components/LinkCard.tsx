@@ -1,11 +1,16 @@
 import { copy, edit, del, done } from '@assets/index.ts'
 import { useState } from 'react'
 
-const LinkCard = ({ title }: { title: string }) => {
+interface LinkCardProps {
+    title: string
+    url: string
+}
+
+const LinkCard = ({ title, url }: LinkCardProps) => {
     const [isCopied, setIsCopied] = useState(false)
 
     const handleCopyClick = () => {
-        navigator.clipboard.writeText(title)
+        navigator.clipboard.writeText(url)
         setIsCopied(true)
         setTimeout(() => {
             setIsCopied(false)
