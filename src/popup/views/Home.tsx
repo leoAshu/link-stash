@@ -21,19 +21,39 @@ const links = [
         title: 'Portfolio',
         link: 'www.linkedin.com/leoAshu',
     },
+    {
+        id: 5,
+        title: 'Leetcode',
+        link: 'www.linkedin.com/leoAshu',
+    },
+    {
+        id: 6,
+        title: 'Portfolio',
+        link: 'www.linkedin.com/leoAshu',
+    },
+    {
+        id: 7,
+        title: 'Leetcode',
+        link: 'www.linkedin.com/leoAshu',
+    },
+    {
+        id: 8,
+        title: 'Portfolio',
+        link: 'www.linkedin.com/leoAshu',
+    },
 ]
 
 const Home = () => {
     return (
-        <>
+        <div className="h-60 overflow-auto scrollbar">
             {links.map((link) => (
                 <LinkCard key={link.id} title={link.title} />
             ))}
 
-            <div className="absolute bottom-4 right-4 h-10 rounded-full shadow-md shadow-[#00000040] cursor-pointer active:scale-[0.9] transition-all ease-in-out duration-300">
+            {/* <div className="absolute bottom-4 right-4 h-10 rounded-full shadow-md shadow-[#00000040] cursor-pointer active:scale-[0.9] transition-all ease-in-out duration-300">
                 <img src={roundButton} />
-            </div>
-        </>
+            </div> */}
+        </div>
     )
 }
 
