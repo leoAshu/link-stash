@@ -19,7 +19,7 @@ const LinkCard = ({ title, url }: LinkCardProps) => {
 
     return (
         <div className="bg-white mt-1 py-1 px-5 shadow flex justify-between items-center">
-            <p className="text-xs">{title}</p>
+            <p className="text-xs font-semibold">{title}</p>
 
             <div className="flex">
                 {isCopied ? (
