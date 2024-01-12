@@ -6,7 +6,7 @@ const Home = () => {
     return (
         <div className="h-60 overflow-auto scrollbar">
             {links.map((link) => (
-                <LinkCard key={link.id} title={link.title} url={link.url} />
+                <LinkCard key={link.id} id={link.id} title={link.title} url={link.url} />
             ))}
         </div>
     )

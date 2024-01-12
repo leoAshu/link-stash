@@ -1,5 +1,6 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useLinks } from '../context/LinksProvider'
+import { View, useView } from '.'
 
 interface AddProps {
     id: string
@@ -7,19 +8,17 @@ interface AddProps {
     url: string
 }
 
-const Add = (props: AddProps) => {
+const Add = ({ id, title, url }: AddProps) => {
+    const { setView } = useView()
     const { addLink, updateLink } = useLinks()
     const [link, setLink] = useState({
-        id: props.id,
-        title: props.title,
-        url: props.url,
+        id,
+        title,
+        url,
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
-        console.log('addView: handleChange')
-        console.log(name, value)
-
         setLink((prevData) => ({ ...prevData, [name]: value }))
     }
 
@@ -32,11 +31,7 @@ const Add = (props: AddProps) => {
             addLink(link)
         }
 
-        setLink({
-            id: '',
-            title: '',
-            url: '',
-        })
+        setView(View.Home)
     }
 
     return (

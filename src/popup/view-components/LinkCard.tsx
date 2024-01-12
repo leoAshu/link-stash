@@ -1,12 +1,15 @@
 import { copy, edit, del, done } from '@assets/index.ts'
 import { useState } from 'react'
+import { useLinks } from '../context/LinksProvider'
 
 interface LinkCardProps {
+    id: string
     title: string
     url: string
 }
 
-const LinkCard = ({ title, url }: LinkCardProps) => {
+const LinkCard = ({ id, title, url }: LinkCardProps) => {
+    const { deleteLink } = useLinks()
     const [isCopied, setIsCopied] = useState(false)
 
     const handleCopyClick = () => {
@@ -39,7 +42,10 @@ const LinkCard = ({ title, url }: LinkCardProps) => {
                     <img className="h-4" src={edit} />
                 </div>
 
-                <div className="w-8 h-8 p-2 ml-1 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center">
+                <div
+                    className="w-8 h-8 p-2 ml-1 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
+                    onClick={() => deleteLink(id)}
+                >
                     <img className="h-4" src={del} />
                 </div>
             </div>
