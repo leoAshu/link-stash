@@ -9,7 +9,7 @@ interface ViewContextProps {
 const ViewContext = createContext<ViewContextProps | undefined>(undefined)
 
 const ViewProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [view, setView] = useState<View>(View.Home)
+    const [view, setView] = useState<View>(View.Add)
 
     return <ViewContext.Provider value={{ view, setView }}>{children}</ViewContext.Provider>
 }
