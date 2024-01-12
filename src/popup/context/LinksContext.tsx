@@ -3,7 +3,7 @@ import { Link } from '.'
 
 interface LinksContextProps {
     links: Link[]
-    addLink: (newLink: Link) => void
+    addLink: (title: string, url: string) => void
     updateLink: (updatedLink: Link) => void
     deleteLink: (linkId: string) => void
 }

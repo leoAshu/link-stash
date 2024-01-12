@@ -50,7 +50,12 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         ])
     }, [])
 
-    const addLink = (newLink: Link) => {
+    const addLink = (title: string, url: string) => {
+        const newLink = {
+            id: Date.now().toString(),
+            title,
+            url,
+        }
         setLinks([...links, newLink])
     }
 
