@@ -14,7 +14,7 @@ const LinkCard = ({ title, url }: LinkCardProps) => {
         setIsCopied(true)
         setTimeout(() => {
             setIsCopied(false)
-        }, 2000)
+        }, 5000)
     }
 
     return (
@@ -23,12 +23,12 @@ const LinkCard = ({ title, url }: LinkCardProps) => {
 
             <div className="flex">
                 {isCopied ? (
-                    <div className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center">
+                    <div className="w-8 h-8 p-2 rounded-full transition-all ease-in-out duration-300 flex justify-center items-center">
                         <img className="h-4" src={done} />
                     </div>
                 ) : (
                     <div
-                        className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
+                        className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-copy transition-all ease-in-out duration-300 flex justify-center items-center"
                         onClick={handleCopyClick}
                     >
                         <img className="h-4" src={copy} />
