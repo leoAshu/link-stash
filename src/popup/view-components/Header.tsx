@@ -1,8 +1,10 @@
 import { logo, add } from '@assets/index'
 import { View, useView } from '../views'
+import { useLinks } from '../context'
 
 const Header = () => {
     const { view, setView } = useView()
+    const { setActiveId } = useLinks()
 
     return (
         <div className="bg-white shadow-md">
@@ -13,7 +15,10 @@ const Header = () => {
                     className={`hover:bg-gray-100 active:bg-gray-200 p-2 rounded-full cursor-pointer ${
                         view == View.Home ? '' : '-rotate-45'
                     } transition-all ease-in-out duration-300`}
-                    onClick={() => setView(view == View.Home ? View.Add : View.Home)}
+                    onClick={() => {
+                        setActiveId('')
+                        setView(view == View.Home ? View.Add : View.Home)
+                    }}
                 >
                     <img src={add} />
                 </div>

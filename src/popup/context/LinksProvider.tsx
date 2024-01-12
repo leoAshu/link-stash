@@ -1,8 +1,8 @@
 import { ReactNode, useContext, useEffect, useState } from 'react'
-import { Link } from '.'
-import LinksContext from './LinksContext'
+import { Link, LinksContext } from '.'
 
 const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [activeId, setActiveId] = useState<string>('')
     const [links, setLinks] = useState<Link[]>([])
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
 
     return (
-        <LinksContext.Provider value={{ links, findById, addLink, updateLink, deleteLink }}>
+        <LinksContext.Provider value={{ links, findById, addLink, updateLink, deleteLink, activeId, setActiveId }}>
             {children}
         </LinksContext.Provider>
     )

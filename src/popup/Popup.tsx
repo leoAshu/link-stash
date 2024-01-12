@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom/client'
-import { Add, Home, View, ViewProvider, useView } from './views'
 import { Header } from './view-components'
+import { Add, Home, View, ViewProvider, useView } from './views'
+import { LinksProvider } from './context'
 import './index.css'
-import LinksProvider from './context/LinksProvider'
 
 function Popup() {
     const { view } = useView()
@@ -12,7 +12,7 @@ function Popup() {
             case View.Home:
                 return <Home />
             case View.Add:
-                return <Add id="" />
+                return <Add />
             default:
                 return null
         }

@@ -1,23 +1,19 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { useLinks } from '../context/LinksProvider'
+import { useLinks } from '../context'
 import { View, useView } from '.'
 
-interface AddProps {
-    id: string
-}
-
-const Add = ({ id }: AddProps) => {
+const Add = () => {
     const { setView } = useView()
-    const { addLink, findById, updateLink } = useLinks()
+    const { addLink, findById, updateLink, activeId } = useLinks()
     const [link, setLink] = useState({
-        id,
+        id: activeId,
         title: '',
         url: '',
     })
 
     useEffect(() => {
-        if (id) {
-            setLink(findById(id))
+        if (activeId) {
+            setLink(findById(activeId))
         }
     }, [])
 

@@ -1,6 +1,7 @@
-import { copy, edit, del, done } from '@assets/index.ts'
 import { useState } from 'react'
-import { useLinks } from '../context/LinksProvider'
+import { View, useView } from '../views'
+import { useLinks } from '../context'
+import { copy, edit, del, done } from '@assets/index.ts'
 
 interface LinkCardProps {
     id: string
@@ -9,7 +10,8 @@ interface LinkCardProps {
 }
 
 const LinkCard = ({ id, title, url }: LinkCardProps) => {
-    const { deleteLink } = useLinks()
+    const { setView } = useView()
+    const { deleteLink, setActiveId } = useLinks()
     const [isCopied, setIsCopied] = useState(false)
 
     const handleCopyClick = () => {
@@ -38,7 +40,13 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
                     </div>
                 )}
 
-                <div className="w-8 h-8 p-2 ml-1 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center">
+                <div
+                    className="w-8 h-8 p-2 ml-1 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
+                    onClick={() => {
+                        setActiveId(id)
+                        setView(View.Add)
+                    }}
+                >
                     <img className="h-4" src={edit} />
                 </div>
 
