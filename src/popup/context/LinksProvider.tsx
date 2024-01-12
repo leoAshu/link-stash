@@ -1,9 +1,54 @@
-import { ReactNode, useContext, useState } from 'react'
+import { ReactNode, useContext, useEffect, useState } from 'react'
 import { Link } from '.'
 import LinksContext from './LinksContext'
 
 const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [links, setLinks] = useState<Link[]>([])
+
+    useEffect(() => {
+        setLinks([
+            {
+                id: '1',
+                title: 'LinkedIn',
+                url: 'www.linkedin.com/leoAshu',
+            },
+            {
+                id: '2',
+                title: 'GitHub',
+                url: 'www.linkedin.com/leoAshu',
+            },
+            {
+                id: '3',
+                title: 'Leetcode',
+                url: 'www.linkedin.com/leoAshu',
+            },
+            {
+                id: '4',
+                title: 'Portfolio',
+                url: 'www.linkedin.com/leoAshu',
+            },
+            {
+                id: '5',
+                title: 'Leetcode',
+                url: 'www.linkedin.com/leoAshu',
+            },
+            {
+                id: '6',
+                title: 'Portfolio',
+                url: 'www.linkedin.com/leoAshu',
+            },
+            {
+                id: '7',
+                title: 'Leetcode',
+                url: 'www.linkedin.com/leoAshu',
+            },
+            {
+                id: '8',
+                title: 'Portfolio',
+                url: 'www.linkedin.com/leoAshu',
+            },
+        ])
+    }, [])
 
     const addLink = (newLink: Link) => {
         setLinks([...links, newLink])

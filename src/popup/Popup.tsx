@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import { Add, Home, View, ViewProvider, useView } from './views'
 import { Header } from './view-components'
 import './index.css'
+import LinksProvider from './context/LinksProvider'
 
 function Popup() {
     const { view } = useView()
@@ -27,6 +28,8 @@ function Popup() {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <ViewProvider>
-        <Popup />
+        <LinksProvider>
+            <Popup />
+        </LinksProvider>
     </ViewProvider>
 )
