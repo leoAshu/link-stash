@@ -18,7 +18,7 @@ function Popup() {
     }
 
     return (
-        <main className="w-60 h-72 bg-[#F5F7F9]">
+        <main className="w-60 h-72 bg-[#F5F7F9] font-inter text-slate-600">
             <Header />
             {renderView()}
         </main>
