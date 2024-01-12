@@ -4,18 +4,22 @@ import { View, useView } from '.'
 
 interface AddProps {
     id: string
-    title: string
-    url: string
 }
 
-const Add = ({ id, title, url }: AddProps) => {
+const Add = ({ id }: AddProps) => {
     const { setView } = useView()
-    const { addLink, updateLink } = useLinks()
+    const { addLink, findById, updateLink } = useLinks()
     const [link, setLink] = useState({
         id,
-        title,
-        url,
+        title: '',
+        url: '',
     })
+
+    useEffect(() => {
+        if (id) {
+            setLink(findById(id))
+        }
+    }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target

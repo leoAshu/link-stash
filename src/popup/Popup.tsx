@@ -12,7 +12,7 @@ function Popup() {
             case View.Home:
                 return <Home />
             case View.Add:
-                return <Add id="" title="" url="" />
+                return <Add id="" />
             default:
                 return null
         }

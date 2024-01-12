@@ -15,6 +15,11 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         ])
     }, [])
 
+    const findById = (id: string) => {
+        const link = links.filter((link) => link.id === id)[0]
+        return link
+    }
+
     const addLink = (newLink: Link) => {
         newLink.id = Date.now().toString()
         setLinks([...links, newLink])
@@ -28,7 +33,11 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         setLinks((prevLinks) => prevLinks.filter((link) => link.id !== linkId))
     }
 
-    return <LinksContext.Provider value={{ links, addLink, updateLink, deleteLink }}>{children}</LinksContext.Provider>
+    return (
+        <LinksContext.Provider value={{ links, findById, addLink, updateLink, deleteLink }}>
+            {children}
+        </LinksContext.Provider>
+    )
 }
 
 const useLinks = () => {
