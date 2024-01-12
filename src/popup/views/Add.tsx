@@ -1,18 +1,42 @@
 import { FormEvent, useState } from 'react'
 import { useLinks } from '../context/LinksProvider'
 
-const Add = () => {
-    const { addLink } = useLinks()
-    const [title, setTitle] = useState('')
-    const [link, setLink] = useState('')
+interface AddProps {
+    id: string
+    title: string
+    url: string
+}
+
+const Add = (props: AddProps) => {
+    const { addLink, updateLink } = useLinks()
+    const [link, setLink] = useState({
+        id: props.id,
+        title: props.title,
+        url: props.url,
+    })
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target
+        console.log('addView: handleChange')
+        console.log(name, value)
+
+        setLink((prevData) => ({ ...prevData, [name]: value }))
+    }
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
 
-        addLink(title, link)
+        if (link.id) {
+            updateLink(link)
+        } else {
+            addLink(link)
+        }
 
-        setTitle('')
-        setLink('')
+        setLink({
+            id: '',
+            title: '',
+            url: '',
+        })
     }
 
     return (
@@ -23,8 +47,9 @@ const Add = () => {
                     <input
                         required
                         type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        name="title"
+                        value={link.title}
+                        onChange={handleChange}
                         className="p-1 outline-none border border-[#0000001A] focus:border-[#00000040] transition-all ease-in-out duration-300"
                     />
                 </div>
@@ -34,8 +59,9 @@ const Add = () => {
                     <input
                         required
                         type="url"
-                        value={link}
-                        onChange={(e) => setLink(e.target.value)}
+                        name="url"
+                        value={link.url}
+                        onChange={handleChange}
                         className="p-1 outline-none border border-[#0000001A] focus:border-[#00000040] transition-all ease-in-out duration-300"
                     />
                 </div>

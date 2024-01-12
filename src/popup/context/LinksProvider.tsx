@@ -12,50 +12,11 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
                 title: 'LinkedIn',
                 url: 'www.linkedin.com/leoAshu',
             },
-            {
-                id: '2',
-                title: 'GitHub',
-                url: 'www.linkedin.com/leoAshu',
-            },
-            {
-                id: '3',
-                title: 'Leetcode',
-                url: 'www.linkedin.com/leoAshu',
-            },
-            {
-                id: '4',
-                title: 'Portfolio',
-                url: 'www.linkedin.com/leoAshu',
-            },
-            {
-                id: '5',
-                title: 'Leetcode',
-                url: 'www.linkedin.com/leoAshu',
-            },
-            {
-                id: '6',
-                title: 'Portfolio',
-                url: 'www.linkedin.com/leoAshu',
-            },
-            {
-                id: '7',
-                title: 'Leetcode',
-                url: 'www.linkedin.com/leoAshu',
-            },
-            {
-                id: '8',
-                title: 'Portfolio',
-                url: 'www.linkedin.com/leoAshu',
-            },
         ])
     }, [])
 
-    const addLink = (title: string, url: string) => {
-        const newLink = {
-            id: Date.now().toString(),
-            title,
-            url,
-        }
+    const addLink = (newLink: Link) => {
+        newLink.id = Date.now().toString()
         setLinks([...links, newLink])
     }
 
