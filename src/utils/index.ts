@@ -1,3 +1,5 @@
+import { fetchLinks, storeLinks } from './storage'
+
 const cleanUrl = (url: string) => {
     try {
         const urlObject = new URL(url)
@@ -13,4 +15,4 @@ const cleanUrl = (url: string) => {
     }
 }
 
-export { cleanUrl }
+export { cleanUrl, fetchLinks, storeLinks }

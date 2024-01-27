@@ -1,18 +1,17 @@
 import { ReactNode, useContext, useEffect, useState } from 'react'
-import { Link, LinksContext } from '.'
+import { Link } from '@src/models'
+import { LinksContext } from '.'
+import { fetchLinks, storeLinks } from '@src/utils'
 
 const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [activeId, setActiveId] = useState<string>('')
     const [links, setLinks] = useState<Link[]>([])
 
     useEffect(() => {
-        setLinks([
-            {
-                id: '1',
-                title: 'LinkedIn',
-                url: 'www.linkedin.com/leoAshu',
-            },
-        ])
+        const init = async () => {
+            setLinks(await fetchLinks())
+        }
+        init()
     }, [])
 
     const findById = (id: string) => {
@@ -32,6 +31,10 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const deleteLink = (linkId: string) => {
         setLinks((prevLinks) => prevLinks.filter((link) => link.id !== linkId))
     }
+
+    useEffect(() => {
+        storeLinks(links)
+    }, [addLink, updateLink, deleteLink])
 
     return (
         <LinksContext.Provider value={{ links, findById, addLink, updateLink, deleteLink, activeId, setActiveId }}>

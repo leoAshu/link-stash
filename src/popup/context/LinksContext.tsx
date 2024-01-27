@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, createContext } from 'react'
-import { Link } from '.'
+import { Link } from '@src/models'
 
 interface LinksContextProps {
     links: Link[]
