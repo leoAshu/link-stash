@@ -16,6 +16,7 @@ const manifest: Manifest.WebExtensionManifest = {
         default_title: 'Link Stash',
         default_popup: 'src/popup/index.html',
     },
+    permissions: ['storage'],
 }
 
 export default manifest
