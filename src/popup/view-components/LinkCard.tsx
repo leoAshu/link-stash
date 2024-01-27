@@ -28,21 +28,16 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
             <p className="text-xs font-semibold overflow-hidden overflow-ellipsis">{title}</p>
 
             <div className="flex">
-                <div
-                    className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
-                    onClick={() => {
-                        window.open(url, '_blank')
-                    }}
-                >
-                    <img className="h-4" src={openLink} />
-                </div>
-
                 {isCopied ? (
-                    <div className="w-8 h-8 p-2 rounded-full transition-all ease-in-out duration-300 flex justify-center items-center">
+                    <div
+                        title="done"
+                        className="w-8 h-8 p-2 rounded-full transition-all ease-in-out duration-300 flex justify-center items-center"
+                    >
                         <img className="h-4" src={done} />
                     </div>
                 ) : (
                     <div
+                        title="copy"
                         className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-copy transition-all ease-in-out duration-300 flex justify-center items-center"
                         onClick={handleCopyClick}
                     >
@@ -51,6 +46,17 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
                 )}
 
                 <div
+                    title="open"
+                    className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
+                    onClick={() => {
+                        window.open(url, '_blank')
+                    }}
+                >
+                    <img className="h-4" src={openLink} />
+                </div>
+
+                <div
+                    title="edit"
                     className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
                     onClick={() => {
                         setActiveId(id)
@@ -61,6 +67,7 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
                 </div>
 
                 <div
+                    title="delete"
                     className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
                     onClick={() => deleteLink(id)}
                 >
