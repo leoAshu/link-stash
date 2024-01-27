@@ -16,7 +16,18 @@ const manifest: Manifest.WebExtensionManifest = {
         default_title: 'Link Stash',
         default_popup: 'src/popup/index.html',
     },
-    permissions: ['storage'],
+    background: {
+        service_worker: 'src/background/index.js',
+        type: 'module',
+    },
+    content_scripts: [
+        {
+            matches: ['http://*/*', 'https://*/*'],
+            js: ['src/content/index.js'],
+            run_at: 'document_idle',
+        },
+    ],
+    permissions: ['storage', 'contextMenus'],
 }
 
 export default manifest
