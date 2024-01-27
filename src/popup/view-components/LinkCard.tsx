@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { View, useView } from '../views'
 import { useLinks } from '../context'
 import { copy, edit, del, done } from '@assets/index.ts'
+import { cleanUrl } from '@src/utils'
 
 interface LinkCardProps {
     id: string
@@ -15,7 +16,7 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
     const [isCopied, setIsCopied] = useState(false)
 
     const handleCopyClick = () => {
-        navigator.clipboard.writeText(url)
+        navigator.clipboard.writeText(cleanUrl(url))
         setIsCopied(true)
         setTimeout(() => {
             setIsCopied(false)
