@@ -25,7 +25,7 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
 
     return (
         <div className="bg-white mt-1 py-1 px-5 shadow flex justify-between items-center">
-            <p className="text-xs font-semibold">{title}</p>
+            <p className="text-xs font-semibold overflow-hidden overflow-ellipsis">{title}</p>
 
             <div className="flex">
                 <div
