@@ -1,4 +1,4 @@
-import { logo, add } from '@assets/index'
+import { add } from '@assets/index'
 import { View, useView } from '../views'
 import { useLinks } from '../context'
 
@@ -9,7 +9,9 @@ const Header = () => {
     return (
         <div className="bg-white shadow-md">
             <div className="h-12 px-4 flex justify-between items-center">
-                <img className="h-8" src={logo} />
+                <p className="ml-1 text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00C6FF] to-[#0072FF]">
+                    LinkStash
+                </p>
 
                 <div
                     className={`hover:bg-gray-100 active:bg-gray-200 p-2 rounded-full cursor-pointer ${
@@ -20,7 +22,7 @@ const Header = () => {
                         setView(view == View.Home ? View.Add : View.Home)
                     }}
                 >
-                    <img src={add} />
+                    <img className="h-3.5 w-4" src={add} />
                 </div>
             </div>
         </div>
