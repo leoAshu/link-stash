@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { View, useView } from '../views'
 import { useLinks } from '../context'
-import { copy, edit, del, done } from '@assets/index.ts'
+import { copy, edit, del, done, openLink } from '@assets/index.ts'
 import { cleanUrl } from '@src/utils'
 
 interface LinkCardProps {
@@ -28,6 +28,15 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
             <p className="text-xs font-semibold">{title}</p>
 
             <div className="flex">
+                <div
+                    className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
+                    onClick={() => {
+                        window.open(url, '_blank')
+                    }}
+                >
+                    <img className="h-4" src={openLink} />
+                </div>
+
                 {isCopied ? (
                     <div className="w-8 h-8 p-2 rounded-full transition-all ease-in-out duration-300 flex justify-center items-center">
                         <img className="h-4" src={done} />
@@ -42,7 +51,7 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
                 )}
 
                 <div
-                    className="w-8 h-8 p-2 ml-1 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
+                    className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
                     onClick={() => {
                         setActiveId(id)
                         setView(View.Add)
@@ -52,7 +61,7 @@ const LinkCard = ({ id, title, url }: LinkCardProps) => {
                 </div>
 
                 <div
-                    className="w-8 h-8 p-2 ml-1 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
+                    className="w-8 h-8 p-2 hover:bg-gray-100 active:bg-gray-200 rounded-full cursor-pointer transition-all ease-in-out duration-300 flex justify-center items-center"
                     onClick={() => deleteLink(id)}
                 >
                     <img className="h-4" src={del} />
