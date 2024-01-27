@@ -9,7 +9,7 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
     useEffect(() => {
         const init = async () => {
-            setLinks(await fetchLinks())
+            setLinks((await fetchLinks()) ?? [])
         }
         init()
     }, [])

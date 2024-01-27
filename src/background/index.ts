@@ -3,7 +3,7 @@ import { cleanUrl, fetchLinks } from '@src/utils'
 const createContextMenu = async () => {
     const storedLinks = await fetchLinks()
 
-    if (storedLinks.length) {
+    if (storedLinks && storedLinks.length) {
         chrome.contextMenus.create({
             id: 'linkStash',
             title: 'Links',
