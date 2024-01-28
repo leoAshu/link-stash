@@ -1,44 +1,38 @@
-import { cleanUrl, fetchLinks } from '@src/utils'
+import { Link } from '@src/models'
+import { fetchLinks, createContextMenuItem, removeContextMenuItem, addContextMenuItemListener } from '@src/utils'
 
-const createContextMenu = async () => {
-    const storedLinks = await fetchLinks()
+// menu item creation needed once
+const init = async () => {
+    // root menu item
+    createContextMenuItem('link-stash', 'Links', ['editable'], '', ['http://*/*', 'https://*/*'])
 
-    if (storedLinks && storedLinks.length) {
-        chrome.contextMenus.create(
-            {
-                id: 'linkStash',
-                title: 'Links',
-                contexts: ['editable'],
-                documentUrlPatterns: ['http://*/*', 'https://*/*'],
-            },
-            () => chrome.runtime.lastError
-        )
-
-        storedLinks.forEach((link) => {
-            chrome.contextMenus.create(
-                {
-                    id: link.id,
-                    title: link.title,
-                    parentId: 'linkStash',
-                    contexts: ['editable'],
-                },
-                () => chrome.runtime.lastError
-            )
-        })
+    // child menu items
+    const links = await fetchLinks()
+    if (links) {
+        links.forEach((link) => createContextMenuItem(link.id, link.title, ['editable'], 'link-stash'))
     }
 
-    chrome.contextMenus.onClicked.addListener(
-        (info: chrome.contextMenus.OnClickData, tab?: chrome.tabs.Tab | undefined) => {
-            if (tab && tab.id) {
-                chrome.tabs.sendMessage(tab.id, {
-                    action: 'pasteLink',
-                    link: cleanUrl(storedLinks.filter((link) => link.id === info.menuItemId.toString())[0].url),
-                })
-            }
-        }
-    )
+    startUp()
 }
 
-chrome.runtime.onInstalled.addListener(createContextMenu)
+// listener setup needed on each startup
+const startUp = async () => {
+    const links = await fetchLinks()
 
-chrome.runtime.onStartup.addListener(createContextMenu)
+    if (links) {
+        links.forEach((link) => addContextMenuItemListener(link))
+    }
+}
+
+chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+    if (message.action === 'addLink') {
+        createContextMenuItem(message.link.id, message.link.title, ['editable'], 'link-stash')
+        addContextMenuItemListener(message.link)
+    } else if (message.action === 'deleteLink') {
+        removeContextMenuItem(message.link.id)
+    }
+})
+
+chrome.runtime.onInstalled.addListener(init)
+
+chrome.runtime.onStartup.addListener(startUp)

@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useEffect, useState } from 'react'
 import { Link } from '@src/models'
 import { LinksContext } from '.'
-import { fetchLinks, storeLinks } from '@src/utils'
+import { fetchLinks, sendMessage, storeLinks } from '@src/utils'
 
 const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [activeId, setActiveId] = useState<string>('')
@@ -21,6 +21,10 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 
     const addLink = (newLink: Link) => {
         newLink.id = Date.now().toString()
+        sendMessage({
+            action: 'addLink',
+            link: newLink,
+        })
         setLinks([...links, newLink])
     }
 
@@ -29,6 +33,10 @@ const LinksProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     }
 
     const deleteLink = (linkId: string) => {
+        sendMessage({
+            action: 'deleteLink',
+            link: findById(linkId),
+        })
         setLinks((prevLinks) => prevLinks.filter((link) => link.id !== linkId))
     }
 

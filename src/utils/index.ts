@@ -1,3 +1,5 @@
+import { sendMessage } from './message'
+import { createContextMenuItem, removeContextMenuItem, addContextMenuItemListener } from './contextMenu'
 import { fetchLinks, storeLinks } from './storage'
 
 const cleanUrl = (url: string) => {
@@ -15,4 +17,12 @@ const cleanUrl = (url: string) => {
     }
 }
 
-export { cleanUrl, fetchLinks, storeLinks }
+export {
+    cleanUrl,
+    fetchLinks,
+    storeLinks,
+    sendMessage,
+    createContextMenuItem,
+    removeContextMenuItem,
+    addContextMenuItemListener,
+}
