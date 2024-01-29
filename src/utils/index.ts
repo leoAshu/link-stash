@@ -1,27 +1,37 @@
-import { sendMessage } from './message'
+import { Action, sendMessage, sendMessageToTab, setupOnMessageListener } from './message'
 import { createContextMenuItem, removeContextMenuItem, addContextMenuItemListener } from './contextMenu'
 import { fetchLinks, storeLinks } from './storage'
 
-const cleanUrl = (url: string) => {
-    try {
-        const urlObject = new URL(url)
-        const parts = urlObject.hostname.split('.')
+/** Some bug: unable to import Message and MessageCallback from message/index */
+interface Message {
+    action: Action
+    body: { [key: string]: any }
+}
 
-        if (parts[0] === 'www') {
-            parts.shift()
-        }
+interface MessageCallback {
+    (message: Message, sender: chrome.runtime.MessageSender): void
+}
+/** */
 
-        return parts.join('.') + urlObject.pathname
-    } catch (error) {
-        return url
-    }
+const onInstalled = (func: any) => {
+    chrome.runtime.onInstalled.addListener(func)
+}
+
+const onStartup = (func: any) => {
+    chrome.runtime.onStartup.addListener(func)
 }
 
 export {
-    cleanUrl,
+    onInstalled,
+    onStartup,
     fetchLinks,
     storeLinks,
+    Action,
+    Message,
+    MessageCallback,
     sendMessage,
+    sendMessageToTab,
+    setupOnMessageListener,
     createContextMenuItem,
     removeContextMenuItem,
     addContextMenuItemListener,

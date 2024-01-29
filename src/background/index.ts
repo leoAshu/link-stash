@@ -1,5 +1,15 @@
-import { Link } from '@src/models'
-import { fetchLinks, createContextMenuItem, removeContextMenuItem, addContextMenuItemListener } from '@src/utils'
+import {
+    onInstalled,
+    onStartup,
+    fetchLinks,
+    createContextMenuItem,
+    removeContextMenuItem,
+    addContextMenuItemListener,
+    Action,
+    Message,
+    MessageCallback,
+    setupOnMessageListener,
+} from '@src/utils'
 
 // menu item creation needed once
 const init = async () => {
@@ -17,22 +27,22 @@ const init = async () => {
 
 // listener setup needed on each startup
 const startUp = async () => {
-    const links = await fetchLinks()
+    setupOnMessageListener(onMessageHandler)
 
+    const links = await fetchLinks()
     if (links) {
         links.forEach((link) => addContextMenuItemListener(link))
     }
 }
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-    if (message.action === 'addLink') {
-        createContextMenuItem(message.link.id, message.link.title, ['editable'], 'link-stash')
-        addContextMenuItemListener(message.link)
-    } else if (message.action === 'deleteLink') {
-        removeContextMenuItem(message.link.id)
+const onMessageHandler: MessageCallback = (message: Message, sender) => {
+    if (message.action === Action.Add) {
+        createContextMenuItem(message.body.link.id, message.body.link.title, ['editable'], 'link-stash')
+        addContextMenuItemListener(message.body.link)
+    } else if (message.action === Action.Delete) {
+        removeContextMenuItem(message.body.link.id)
     }
-})
+}
 
-chrome.runtime.onInstalled.addListener(init)
-
-chrome.runtime.onStartup.addListener(startUp)
+onInstalled(init)
+onStartup(startUp)

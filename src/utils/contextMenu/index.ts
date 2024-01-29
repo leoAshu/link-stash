@@ -1,5 +1,5 @@
-import { Link } from '@src/models'
-import { cleanUrl } from '..'
+import { Link, cleanUrl } from '@src/models'
+import { Action, sendMessageToTab } from '..'
 
 const createContextMenuItem = (
     id: string,
@@ -8,33 +8,21 @@ const createContextMenuItem = (
     parentId?: string,
     documentUrlPatterns?: string[]
 ) => {
-    console.log('create MenuItem')
-    console.log(id)
-    console.log(title)
-
     if (parentId) {
-        chrome.contextMenus.create(
-            {
-                id: id,
-                title: title,
-                contexts: contexts,
-                parentId: parentId,
-                documentUrlPatterns: documentUrlPatterns,
-            }
-            // () => chrome.runtime.lastError
-        )
-        console.log('created Child MenuItem')
+        chrome.contextMenus.create({
+            id: id,
+            title: title,
+            contexts: contexts,
+            parentId: parentId,
+            documentUrlPatterns: documentUrlPatterns,
+        })
     } else {
-        chrome.contextMenus.create(
-            {
-                id: id,
-                title: title,
-                contexts: contexts,
-                documentUrlPatterns: documentUrlPatterns,
-            }
-            // () => chrome.runtime.lastError
-        )
-        console.log('created Root MenuItem')
+        chrome.contextMenus.create({
+            id: id,
+            title: title,
+            contexts: contexts,
+            documentUrlPatterns: documentUrlPatterns,
+        })
     }
 }
 
@@ -46,12 +34,9 @@ const addContextMenuItemListener = (link: Link) => {
     chrome.contextMenus.onClicked.addListener(
         (info: chrome.contextMenus.OnClickData, tab?: chrome.tabs.Tab | undefined) => {
             if (tab && tab.id && info.menuItemId === link.id) {
-                console.log(info.menuItemId)
-                console.log(link)
-
-                chrome.tabs.sendMessage(tab.id, {
-                    action: 'pasteLink',
-                    link: cleanUrl(link.url),
+                sendMessageToTab(tab.id, {
+                    action: Action.Paste,
+                    body: { link: cleanUrl(link.url) },
                 })
             }
         }

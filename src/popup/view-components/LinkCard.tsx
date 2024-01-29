@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { View, useView } from '../views'
 import { useLinks } from '../context'
+import { cleanUrl } from '@src/models'
 import { copy, edit, del, done, openLink } from '@assets/index.ts'
-import { cleanUrl } from '@src/utils'
 
 interface LinkCardProps {
     id: string
