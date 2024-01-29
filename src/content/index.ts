@@ -5,7 +5,7 @@ const onMessageHandler: MessageCallback = (message: Message, sender) => {
         const focusedInput = document.activeElement
 
         if (focusedInput) {
-            if (focusedInput.tagName === 'INPUT' || focusedInput?.tagName === 'TEXTAREA') {
+            if (focusedInput.tagName === 'INPUT' || focusedInput.tagName === 'TEXTAREA') {
                 ;(focusedInput as HTMLInputElement | HTMLTextAreaElement).value += message.body.link
             } else {
                 ;(focusedInput as HTMLElement).innerText += message.body.link

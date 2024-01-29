@@ -9,23 +9,28 @@ import {
     Message,
     MessageCallback,
     setupOnMessageListener,
+    config,
 } from '@src/utils'
 
-// menu item creation needed once
 const init = async () => {
     // root menu item
-    createContextMenuItem('link-stash', 'Links', ['editable'], '', ['http://*/*', 'https://*/*'])
+    createContextMenuItem(
+        config.rootMenuItemId,
+        config.rootMenuItemTitle,
+        config.contexts,
+        '',
+        config.documentUrlPatterns
+    )
 
     // child menu items
     const links = await fetchLinks()
     if (links) {
-        links.forEach((link) => createContextMenuItem(link.id, link.title, ['editable'], 'link-stash'))
+        links.forEach((link) => createContextMenuItem(link.id, link.title, config.contexts, config.rootMenuItemId))
     }
 
     startUp()
 }
 
-// listener setup needed on each startup
 const startUp = async () => {
     setupOnMessageListener(onMessageHandler)
 
@@ -37,7 +42,7 @@ const startUp = async () => {
 
 const onMessageHandler: MessageCallback = (message: Message, sender) => {
     if (message.action === Action.Add) {
-        createContextMenuItem(message.body.link.id, message.body.link.title, ['editable'], 'link-stash')
+        createContextMenuItem(message.body.link.id, message.body.link.title, config.contexts, config.rootMenuItemId)
         addContextMenuItemListener(message.body.link)
     } else if (message.action === Action.Delete) {
         removeContextMenuItem(message.body.link.id)

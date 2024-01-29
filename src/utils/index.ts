@@ -1,6 +1,7 @@
 import { Action, sendMessage, sendMessageToTab, setupOnMessageListener } from './message'
 import { createContextMenuItem, removeContextMenuItem, addContextMenuItemListener } from './contextMenu'
 import { fetchLinks, storeLinks } from './storage'
+import config from './config'
 
 /** Some bug: unable to import Message and MessageCallback from message/index */
 interface Message {
@@ -22,6 +23,7 @@ const onStartup = (func: any) => {
 }
 
 export {
+    config,
     onInstalled,
     onStartup,
     fetchLinks,
